@@ -5,6 +5,7 @@ import User from "@/model/User.model";
 import becrypt from "bcryptjs";
 
 export async function POST(request:Request){
+   console.log("Signup called")
    await dbConnect();
 
    try{
@@ -70,8 +71,9 @@ export async function POST(request:Request){
          })
          await newUser.save()
       }
-      const emailResponse:any = await sendVerificationEmail(email,username,verifyCode)
 
+      const emailResponse:any = await sendVerificationEmail(email,username,verifyCode)
+      console.log("Email Response",emailResponse)
       if(!emailResponse.success){
          return Response.json({
             status:500,
