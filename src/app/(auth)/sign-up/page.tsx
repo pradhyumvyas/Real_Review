@@ -95,7 +95,7 @@ function page() {
   }
 
   return (
-    <div className = "flex justify-center items-center bg-slate-600">
+    <div className = "flex justify-center items-center bg-slate-600 min-h-screen">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-black">Join Real Reviews</h1>
