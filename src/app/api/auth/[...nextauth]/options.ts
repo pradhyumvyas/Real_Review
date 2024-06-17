@@ -1,5 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google"
+import InstagramProvider from "next-auth/providers/instagram";
 
 import bcrypt from "bcryptjs"
 import dbConnect from "@/lib/dbConnect"
@@ -43,7 +45,15 @@ export const authOptions:NextAuthOptions = {
                throw new Error(err)
             }
          }
-      })
+      }),
+      InstagramProvider({
+         clientId:process.env.INSTAGRAM_CLIENT_ID,
+         clientSecret:process.env.INSTAGRAM_CLIENT_SECRET
+      }),
+      GoogleProvider({
+         clientId:process.env.GOOGLE_CLIENT_ID as string || '',
+         clientSecret:process.env.GOOGLE_CLIENT_SECRET as string || ''
+      }),
    ],
    callbacks:{
       async session({ session, token }) {
@@ -73,4 +83,5 @@ export const authOptions:NextAuthOptions = {
    },
    secret:process.env.NEXTAUTH_SECRET_KEY,
 }
+
 

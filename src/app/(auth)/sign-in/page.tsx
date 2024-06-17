@@ -15,8 +15,12 @@ import { Form, FormField, FormItem, FormDescription, FormControl, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { log } from "util";
+import GoogleSignInButton from "@/components/custom-component/GoogleSignInButton";
+import InstagramSignInButton from "@/components/custom-component/InstagramSignInButton";
+import { Separator } from "@/components/ui/separator";
+import { User } from "@/model/User.model";
 
 
 function SignIn() {
@@ -35,6 +39,13 @@ function SignIn() {
     }
   })
 
+  const { data, status } = useSession();
+  const user = data?.user as any;
+  console.log("Data", data);
+  if(status === 'authenticated'){
+    console.log("User is already signed in", user);
+    router.replace('/dashboard');
+  }
 
 
   const onSubmit = async (data:z.infer<typeof signInSchema>) =>{
@@ -138,6 +149,9 @@ function SignIn() {
             
           </form>
         </Form>
+        <Separator />
+        <GoogleSignInButton />
+        <InstagramSignInButton />
         <div className="text-center mt-4">
           <Link href="/sign-up">
           Don't have an account? Sign up
