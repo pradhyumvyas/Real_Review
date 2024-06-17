@@ -104,7 +104,7 @@ function SignIn() {
                     />
                   </FormControl>
                   <FormDescription>
-                    Email
+                    Enter your Email or Username
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -122,7 +122,7 @@ function SignIn() {
                     />
                   </FormControl>
                   <FormDescription>
-                    This is your public display name.
+                    Enter your password
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

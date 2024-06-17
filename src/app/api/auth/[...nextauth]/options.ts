@@ -8,14 +8,15 @@ import User from "@/model/User.model"
 export const authOptions:NextAuthOptions = {
    providers:[
       CredentialsProvider({
-         id:'Credentials',
-         name:"Credentials",
+         id:'credentials',
+         name:"credentials",
          credentials:{
             email:{label:"Email",type:"text"},
             password:{label:"Password",type:"password"}
          },
          async authorize(credentials:any):Promise<any>{
             await dbConnect()
+            console.log("credentials", credentials)
             try {
                const user = await User
                   .findOne({
