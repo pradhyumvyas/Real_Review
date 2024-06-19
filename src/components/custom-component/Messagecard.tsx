@@ -45,7 +45,7 @@ const Messagecard = ({message, onMessageDelete}:MessagecardType) => {
       });
    }
 
-   let reviewSendAt:Date = new Date(message.createdAt).toLocaleString();
+   let reviewSendAt:String = new Date(message.createdAt).toLocaleString();
 
   const alertDialogeBox = () => {
     return (
