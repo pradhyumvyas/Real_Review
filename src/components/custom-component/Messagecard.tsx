@@ -44,43 +44,50 @@ const Messagecard = ({message, onMessageDelete}:MessagecardType) => {
          description: "Message has been deleted successfully"
       });
    }
+
+   let reviewSendAt:Date = new Date(message.createdAt).toLocaleString();
+
   const alertDialogeBox = () => {
     return (
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button variant="destructive">
-            <X className="w-5 h-5" />
-          </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              Message and remove your data from our servers.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={()=>handleDeleteConfirm()}>Continue</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <div className='absolute top-0 right-0 m-5'>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="destructive">
+              <X className="w-5 h-5" />
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                Message and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={()=>handleDeleteConfirm()}>Continue</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     );
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
-      </CardHeader>
-      {alertDialogeBox()}
-      <CardContent>{/* <p>Card Content</p> */}</CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
-    </Card>
+    <div className="relative">
+      <Card>
+        <CardHeader>
+          <CardTitle>Review</CardTitle>
+          <CardDescription></CardDescription>
+        </CardHeader>
+        {alertDialogeBox()}
+        <CardContent>{message.content}</CardContent>
+        <CardFooter>
+          <p>Review send on {reviewSendAt}</p>
+        </CardFooter>
+      </Card>
+    </div>
   );
 };
 

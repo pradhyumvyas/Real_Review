@@ -8,11 +8,12 @@ import { Message, User } from '@/model/User.model'
 import { AcceptMessageSchema } from '@/schemas/acceptMessageSchema'
 import { ApiResponse } from '@/types/ApiResponse'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Switch } from '@radix-ui/react-switch'
+import { Switch } from '@/components/ui/switch'
 import axios, { AxiosError } from 'axios'
 import { useSession } from 'next-auth/react'
 import React,{useCallback, useEffect, useState} from 'react'
 import { useForm } from 'react-hook-form'
+import { Badge } from '@/components/ui/badge'
 
 const page = () => {
   const [message, setMessage] = useState<Message[]>([])
@@ -59,6 +60,8 @@ const page = () => {
     try{
       const response = await axios.get<ApiResponse>('/api/get-messages')
       setMessage(response.data.messages || [])
+      console.log("Messages", response.data.messages);
+      
       toast({
         title:'Success',
         description:'Latest Messages fetched successfully',
@@ -120,20 +123,22 @@ const page = () => {
     navigator.clipboard.writeText(profileUrl)
     toast({
       title:'URL Copied',
-      description:'Profile URL copied to clipboard',
+      description:'Profile URL copied to clipboard'
     })
   }
   return (
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
-      <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+      <h1 className="text-5xl font-bold mb-4 italic">User Dashboard</h1>
       <div className="mb-4">
         <h2>Profile</h2>
         <p>Username: {username}</p>
-        <input type='text' value={profileUrl} readOnly className=''/>
-        <Button onClick={copyToClipboard}>Copy</Button>
+        <div className = 'flex bg-gray-100 justify-between p-5 mt-5'>
+          <input type='text' value={profileUrl} readOnly className='bg-gray-200 p-3'/>
+          <Button onClick={copyToClipboard}>Copy</Button>
+        </div>
       </div>
 
-      <div>
+      <div className='mb-5'>
         <Switch
           {...register('acceptMessages')}
           checked={acceptMessages}
@@ -145,16 +150,24 @@ const page = () => {
           </span>
       </div>
       <Separator/>
-      <h2>Messages</h2>
-      {isLoading && <div>Loading...</div>}
-      {!isLoading && message.length === 0 && <div>No messages</div>}
-      {!isLoading && message.length > 0 && (
-        <ul>
-          {message.map((msg)=>(
-            <Messagecard key={msg._id} message={msg} onMessageDelete={handleDeleteMessage}/>
-          ))}
-        </ul>
-      )}
+      <div className="mt-5">
+        <h2>Messages</h2>
+        {isLoading && <div>Loading...</div>}
+        {!isLoading && message.length === 0 && 
+          <div className='text-center'>
+            <Badge variant="destructive">
+              <p className='text-5xl p-3'>You don't have any review for now</p>
+            </Badge>
+          </div>
+        }
+        {!isLoading && message.length > 0 && (
+          <ul>
+            {message.map((msg)=>(
+              <Messagecard key={msg._id} message={msg} onMessageDelete={handleDeleteMessage}/>
+            ))}
+          </ul>
+        )}
+      </div>
 
     </div>
   )
