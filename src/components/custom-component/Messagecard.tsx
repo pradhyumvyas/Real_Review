@@ -76,9 +76,9 @@ const Messagecard = ({message, onMessageDelete}:MessagecardType) => {
 
   return (
     <div className="relative">
-      <Card>
+      <Card className="card-bordered bg-gray-900 text-white">
         <CardHeader>
-          <CardTitle>Review</CardTitle>
+          <CardTitle className="flex justify-between items-center">Review</CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>
         {alertDialogeBox()}
