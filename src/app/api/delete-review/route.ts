@@ -23,11 +23,12 @@ export async function DELETE(request:Request){
    }
 
    let {reviewId} = await request.json();
-   reviewId = new mongoose.Types.ObjectId(reviewId);
-
+   // reviewId = new mongoose.Types.ObjectId(reviewId);
+   console.log("reviewId", reviewId);
    try {
       const getUserDetails = await UserModel.findOne({_id:user._id});
-
+      console.log("getUserDetails", getUserDetails);
+      
       if(!getUserDetails){
          return Response.json({
             success:false,
@@ -36,8 +37,12 @@ export async function DELETE(request:Request){
             status:404
          })
       }
+      console.log("idddd",getUserDetails.messages[1]._id === reviewId, getUserDetails.messages[1]._id.toString());
+      
+      getUserDetails.messages = getUserDetails.messages.filter((review) => review._id.toString() !== reviewId);
+      // let a = getUserDetails.messages.filter((review) => review._id == reviewId);
+      console.log("getUserDetailaaaaaas", getUserDetails);
 
-      getUserDetails.messages = getUserDetails.messages.filter((review) => review._id !== reviewId);
       getUserDetails.save();
 
       return Response.json({

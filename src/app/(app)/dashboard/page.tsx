@@ -60,7 +60,7 @@ const page = () => {
     try{
       const response = await axios.get<ApiResponse>('/api/get-messages')
       setMessage(response.data.messages || [])
-      console.log("Messages", response.data.messages);
+      console.log("Messages1212121212121212", response.data.messages);
       
       toast({
         title:'Success',
