@@ -60,8 +60,6 @@ const page = () => {
     try{
       const response = await axios.get<ApiResponse>('/api/get-messages')
       setMessage(response.data.messages || [])
-      console.log("Messages1212121212121212", response.data.messages);
-      
       toast({
         title:'Success',
         description:'Latest Messages fetched successfully',
@@ -93,7 +91,7 @@ const page = () => {
   const handleSwichChange = async() =>{
     try{
       const response = await axios.post<ApiResponse>('/api/accept-message',{
-        acceptMessages:!acceptMessages
+        acceptMessage:!acceptMessages
       })
       setValue('acceptMessages',!acceptMessages)
       toast({
@@ -161,7 +159,7 @@ const page = () => {
           </div>
         }
         {!isLoading && message.length > 0 && (
-          <ul className='flex justify-between flex-wrap'>
+          <ul className='flex justify-around flex-wrap'>
             {message.map((msg)=>(
               <Messagecard key={msg._id} message={msg} onMessageDelete={handleDeleteMessage}/>
             ))}

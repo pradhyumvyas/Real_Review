@@ -12,8 +12,6 @@ export async function GET(request:Request){
    const session = await getServerSession({req:request, ...authOptions});
    const user:User = session?.user as User;
 
-   console.log("Userss", session, user)
-
    if(!session || !session?.user){
       return Response.json({
          success:false,

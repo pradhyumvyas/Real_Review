@@ -88,7 +88,7 @@ const Messagecard = ({message, onMessageDelete}:MessagecardType) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative m-4">
       <Card className="card-bordered bg-gray-900 text-white">
         <CardHeader>
           <CardTitle className="flex justify-between items-center">Review</CardTitle>
