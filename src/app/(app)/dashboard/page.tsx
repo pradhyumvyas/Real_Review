@@ -161,7 +161,7 @@ const page = () => {
           </div>
         }
         {!isLoading && message.length > 0 && (
-          <ul>
+          <ul className='flex justify-between flex-wrap'>
             {message.map((msg)=>(
               <Messagecard key={msg._id} message={msg} onMessageDelete={handleDeleteMessage}/>
             ))}
