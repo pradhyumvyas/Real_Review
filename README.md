@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Review Project
+
+This project is a web application for managing and sending anonymous reviews. Users can sign up and log in using their email, verify their account via an email OTP, or authenticate using OAuth like (Sign In with Google). Once verified, users can receive anonymous reviews from the user via registered user unique username.
+
+## Features
+
+- **User Authentication**: Sign up and log in using email.
+- **Email Verification**: Verify accounts with an OTP sent to the user's email.
+- **OAuth Integration**: Authenticate using third-party services.
+- **Anonymous Reviews**: Send anonymous reviews to verified accounts.
+- **Manage Reviews**: View and manage reviews sent by users.
+- **Tech Stack**: Built with Next.js, MongoDB, and NextAuth.js.
 
 ## Getting Started
 
-First, run the development server:
+Follow these instructions to get a copy of the project up and running on your local machine.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Make sure you have the following installed on your local machine:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js
+- MongoDB
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Installation
 
-## Learn More
+1. **Clone the repository**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone https://github.com/your-username/review-project.git
+   cd review-project
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. **Set up environment variables**
+   
+      Create a `.env.local` file in the root directory and add the following environment variables:
+   
+      ```bash
 
-## Deploy on Vercel
+      MONGODB_URI=your_mongodb_uri
+      RESEND_API_KEY= your_sendgrid_api_key
+      NEXTAUTH_SECRET_KEY= your_nextauth_secret_key
+      OPENAI_API_KEY= your_openai_api_key
+      INSTAGRAM_CLIENT_ID= your_instagram_client_id
+      INSTAGRAM_CLIENT_SECRET= your_instagram_client_secret
+      GOOGLE_CLIENT_ID= your_google_client_id
+      GOOGLE_CLIENT_SECRET= your_google_client_secret
+      ```
+4. **Run the development server**
+   ```bash
+      npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Project Structure
+    Here's an overview of the project's structure:
+       
+      ```
+      review-project/
+      ├── src/
+      │   ├── app/
+      │   │   ├── (app)/            #Main app components
+      │   │   ├── (auth)/           #Authentication components
+      │   │   ├── api/              #API routes
+      │   │   ├── User/             #User components
+      │   ├── components/           #Tailwind CSS components
+      │   ├── context/              #Global context
+      │   ├── helper/               #Helper functions
+      │   ├── lib/                  #Utility functions
+      │   ├── model/                #Mongoose models
+      │   ├── schemas/              #zod validation schemas
+      │   ├── types/                #Typescript types
+      │   ├── middleware.ts         #Middleware functions   
+      ├── .env
+      ├── .gitignore
+      ├── next.config.js
+      ├── package.json
+      ├── tailwind.config.js
+      ├── README.md
+      ```
+
+### Authentication Flow
+1. Email Signup/Login: Users can sign up or log in using their email. An OTP is sent to the provided email for verification.
+2. Email Verification: Users enter the OTP recieved on their email to verify their email address.
+3. OAuth Authentication: Users can also log in using third-party OAuth providers like Google, Facebook.
+4. Anonymous Reviews: Once logged in and verified, People can share anonymous reviews to registered users.
+  - Route for sending reviews is `/u/<username>`.
+  - use [send_review](http://localhost:3000/u/one2) link to send reviews.
+
+### Tech Stack
+   - Next.js: A React framework for server-rendered applications.
+   - MongoDB: A NoSQL database for storing user data and reviews.
+   - NextAuth.js: Authentication for Next.js applications.
+   - Resend Email: For sending email OTPs.
