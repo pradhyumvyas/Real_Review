@@ -27,7 +27,7 @@ Make sure you have the following installed on your local machine:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/your-username/review-project.git
+   git clone https://github.com/pradhyumvyas/Real_Review.git
    cd review-project
    ```
 
@@ -41,7 +41,6 @@ Make sure you have the following installed on your local machine:
       Create a `.env.local` file in the root directory and add the following environment variables:
    
       ```bash
-
       MONGODB_URI=your_mongodb_uri
       RESEND_API_KEY= your_sendgrid_api_key
       NEXTAUTH_SECRET_KEY= your_nextauth_secret_key
@@ -51,6 +50,7 @@ Make sure you have the following installed on your local machine:
       GOOGLE_CLIENT_ID= your_google_client_id
       GOOGLE_CLIENT_SECRET= your_google_client_secret
       ```
+      
 4. **Run the development server**
    ```bash
       npm run dev
